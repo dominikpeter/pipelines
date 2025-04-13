@@ -30,7 +30,7 @@ import sys
 import subprocess
 import inspect
 
-from config import API_KEY, PIPELINES_DIR
+from config import API_KEY, PIPELINES_DIR, LOG_LEVELS
 
 if not os.path.exists(PIPELINES_DIR):
     os.makedirs(PIPELINES_DIR)
@@ -39,6 +39,10 @@ if not os.path.exists(PIPELINES_DIR):
 PIPELINES = {}
 PIPELINE_MODULES = {}
 PIPELINE_NAMES = {}
+
+#Add GLOBAL_LOG_LEVEL for Pipeplines
+log_level = os.getenv('GLOBAL_LOG_LEVEL', 'INFO').upper()
+logging.basicConfig(level=LOG_LEVELS[log_level])
 
 
 def get_all_pipelines():
